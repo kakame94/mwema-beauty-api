@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: mwema-beauty-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: FRONTEND_URL
+        value: https://mwema-beauty.netlify.app
+      - key: DATABASE_URL
+        value: sqlite:///./mwema.db
+      - key: REDIS_URL
+        value: redis://localhost:6379
+      - key: PYTHON_VERSION
+        value: "3.11"
